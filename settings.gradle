@@ -4,4 +4,4 @@ plugins {
 }
 
 rootProject.name = 'rabbitmq-examples'
-//include 'scheduled_async'
+include 'simple_json_amqp'
