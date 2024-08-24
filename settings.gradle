@@ -13,4 +13,5 @@ include 'simple_json_amqp',
         'acknowledgement_modes',
         'pull_vs_push_approach',
         'prefetch_count',
-        'prefetch_count:bean_configuration_perfect_count'
+        'prefetch_count:bean_configuration_perfect_count',
+        'prefetch_count:rabbit_properties_prefetch_count'

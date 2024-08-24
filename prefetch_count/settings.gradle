@@ -1,3 +1,4 @@
 rootProject.name = 'prefetch_count'
 
-include 'bean_configuration_perfect_count'
+include 'bean_configuration_perfect_count',
+        'rabbit_properties_prefetch_count'
