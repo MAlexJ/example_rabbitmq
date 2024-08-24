@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: bean_configuration_perfect_count
+  config:
+    import: optional:file:.env[.properties]
+
+custom:
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME:***}
+    password: ${RABBITMQ_PASSWORD:***}
+    port: ${RABBITMQ_PORT:5672}
+    host: ${RABBITMQ_HOST:localhost}
+    virtualhost: ${RABBITMQ_VIRTUAL_HOST:***}
+    queue: bean_configuration_perfect_count_queue
+    exchange: bean_configuration_perfect_count_exchange
+    routing:
+      key: bean_configuration_perfect_count_routing_key
+
+  threads:
+    virtual:
+      enabled: true

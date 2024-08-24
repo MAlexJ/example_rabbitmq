@@ -1,0 +1,3 @@
+rootProject.name = 'prefetch_count'
+
+include 'bean_configuration_perfect_count'

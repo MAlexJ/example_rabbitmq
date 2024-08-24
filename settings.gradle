@@ -4,4 +4,13 @@ plugins {
 }
 
 rootProject.name = 'rabbitmq-examples'
-include 'simple_json_amqp'
+
+include 'simple_json_amqp',
+        'exchange_types',
+        'amqp',
+        'queue_types',
+        'dead_lettered',
+        'acknowledgement_modes',
+        'pull_vs_push_approach',
+        'prefetch_count',
+        'prefetch_count:bean_configuration_perfect_count'
