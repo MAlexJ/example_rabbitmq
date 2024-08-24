@@ -1,0 +1,13 @@
+custom:
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME:***}
+    password: ${RABBITMQ_PASSWORD:***}
+    port: ${RABBITMQ_PORT:5672}
+    host: ${RABBITMQ_HOST:localhost}
+    virtualhost: ${RABBITMQ_VIRTUAL_HOST:***}
+    queue:
+      request: async_remoute_call_queue
+      reply: async_remoute_call_reply_queue
+    exchange: async_remoute_call_exchange
+    routing:
+      key: async_remoute_call_routing_key
