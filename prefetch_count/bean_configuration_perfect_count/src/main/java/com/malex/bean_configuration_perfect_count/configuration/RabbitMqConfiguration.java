@@ -1,7 +1,6 @@
 package com.malex.bean_configuration_perfect_count.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -16,8 +15,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@RequiredArgsConstructor
-public class BaseRabbitMqConfiguration {
+public class RabbitMqConfiguration {
 
   @Value("${custom.rabbitmq.username}")
   private String username;

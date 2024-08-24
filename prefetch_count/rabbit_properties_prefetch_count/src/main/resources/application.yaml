@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: rabbit_properties_prefetch_count
+
+  config:
+    import: optional:file:.env[.properties]
+
+  threads:
+    virtual:
+      enabled: true
+
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+    listener:
+      simple:
+        prefetch: 1
+
+
+custom:
+  rabbitmq:
+    queue: rabbit_properties_prefetch_count_queue
+    exchange: rabbit_properties_prefetch_count_exchange
+    routing:
+      key: rabbit_properties_prefetch_count_routing_key

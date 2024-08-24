@@ -1,4 +1,4 @@
-package com.malex.bean_configuration_perfect_count.configuration;
+package com.malex.rabbit_properties_prefetch_count.configuration;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -9,11 +9,8 @@ import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class QueueRabbitMqConfiguration {
-
+public class BindingQueueExchangeConfiguration {
   @Value("${custom.rabbitmq.queue}")
   private String queue;
 
