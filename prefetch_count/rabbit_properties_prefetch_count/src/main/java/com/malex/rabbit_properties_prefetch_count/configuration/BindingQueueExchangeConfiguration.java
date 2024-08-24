@@ -9,8 +9,11 @@ import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class BindingQueueExchangeConfiguration {
+
   @Value("${custom.rabbitmq.queue}")
   private String queue;
 
