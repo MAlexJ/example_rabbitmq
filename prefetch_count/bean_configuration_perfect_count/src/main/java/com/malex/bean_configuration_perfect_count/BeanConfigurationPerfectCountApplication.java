@@ -1,5 +1,6 @@
 package com.malex.bean_configuration_perfect_count;
 
+import com.rabbitmq.client.Channel;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
@@ -8,11 +9,13 @@ import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -111,8 +114,11 @@ public class BeanConfigurationPerfectCountApplication {
   class Consumer {
 
     @RabbitHandler
-    public void handle(MessageEvent event) {
-      log.info("Consuming event {}", event);
+    public void handle(
+        MessageEvent event, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
+      log.info("Received message: {}", event);
+      log.info("Delivery tag: {}", tag);
+      log.info("Channel channel: {}", channel);
     }
   }
 }

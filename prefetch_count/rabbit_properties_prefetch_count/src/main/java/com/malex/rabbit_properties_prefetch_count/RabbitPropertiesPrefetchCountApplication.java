@@ -99,8 +99,8 @@ public class RabbitPropertiesPrefetchCountApplication {
 
     @RabbitHandler
     public void handle(
-        MessageEvent message, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
-      log.info("Received message: {}", message);
+        MessageEvent event, Channel channel, @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
+      log.info("Received message: {}", event);
       log.info("Delivery tag: {}", tag);
       log.info("Channel channel: {}", channel);
     }
