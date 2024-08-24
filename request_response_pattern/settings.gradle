@@ -1,0 +1,3 @@
+rootProject.name = 'request_response_pattern'
+
+include 'blocking_remote_call'

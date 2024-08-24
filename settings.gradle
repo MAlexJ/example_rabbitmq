@@ -14,4 +14,6 @@ include 'simple_json_amqp',
         'pull_vs_push_approach',
         'prefetch_count',
         'prefetch_count:bean_configuration_perfect_count',
-        'prefetch_count:rabbit_properties_prefetch_count'
+        'prefetch_count:rabbit_properties_prefetch_count',
+        'request_response_pattern:blocking_remote_call',
+        'request_response_pattern'
