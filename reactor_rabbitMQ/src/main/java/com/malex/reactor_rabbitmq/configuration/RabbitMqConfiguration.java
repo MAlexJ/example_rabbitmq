@@ -3,12 +3,7 @@ package com.malex.reactor_rabbitmq.configuration;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Delivery;
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.PreDestroy;
-import java.util.Objects;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.context.annotation.Bean;
@@ -45,21 +40,11 @@ public class RabbitMqConfiguration {
   @Value("${custom.rabbitmq.queue}")
   private String queue;
 
-//  private final AmqpAdmin amqpAdmin;
-
-//  @PostConstruct
-//  public void init() {
-//    var rabbirQueue = QueueBuilder.durable(queue).autoDelete().ttl(2000).build();
-//    amqpAdmin.declareQueue(rabbirQueue);
-//  }
-
-
-
   // the mono for connection, it is cached to re-use the connection across sender and receiver
   // instances
   // this should work properly in most cases
   @Bean()
-  Mono<Connection> connectionMono(RabbitProperties rabbitProperties) {
+  public Mono<Connection> connectionMono(RabbitProperties rabbitProperties) {
     ConnectionFactory connectionFactory = new ConnectionFactory();
     connectionFactory.setHost(host);
     connectionFactory.setPort(port);
@@ -70,17 +55,17 @@ public class RabbitMqConfiguration {
   }
 
   @Bean
-  Sender sender(Mono<Connection> connectionMono) {
+  public Sender sender(Mono<Connection> connectionMono) {
     return RabbitFlux.createSender(new SenderOptions().connectionMono(connectionMono));
   }
 
   @Bean
-  Receiver receiver(Mono<Connection> connectionMono) {
+  public Receiver receiver(Mono<Connection> connectionMono) {
     return RabbitFlux.createReceiver(new ReceiverOptions().connectionMono(connectionMono));
   }
 
   @Bean
-  Flux<Delivery> deliveryFlux(Receiver receiver) {
+  public Flux<Delivery> deliveryFlux(Receiver receiver) {
     return receiver
         // 1.           .consumeManualAck(queue)
         // 2.           .consumeAutoAck(queue)

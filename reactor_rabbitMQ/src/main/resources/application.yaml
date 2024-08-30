@@ -17,7 +17,9 @@ custom:
     host: ${RABBITMQ_HOST:localhost}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
     queue: reactor_rabbitMQ_queue
-    exchange: reactor_rabbitMQ_exchange
+    exchange:
+      name: reactor_rabbitMQ_exchange
+      type: "direct"
     routing:
       key: reactor_rabbitMQ_routing_key
 
