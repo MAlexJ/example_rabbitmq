@@ -50,6 +50,7 @@ public class Consumer {
                 log.info(" <<<< properties - {}", properties);
                 log.info(" <<<< json - {}", json);
                 log.info(" <<<< event - {}", event);
+
                 /*
                     Business logic
                 */

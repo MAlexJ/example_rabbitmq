@@ -43,7 +43,7 @@ public class RabbitMqConfiguration {
   // the mono for connection, it is cached to re-use the connection across sender and receiver
   // instances
   // this should work properly in most cases
-  @Bean()
+  @Bean
   public Mono<Connection> connectionMono(RabbitProperties rabbitProperties) {
     ConnectionFactory connectionFactory = new ConnectionFactory();
     connectionFactory.setHost(host);
