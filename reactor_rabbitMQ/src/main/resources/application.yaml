@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: reactor_rabbitMQ
+
+  threads:
+    virtual:
+      enabled: true
+
+  config:
+    import: optional:file:.env[.properties]
+
+custom:
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    port: ${RABBITMQ_PORT:5672}
+    host: ${RABBITMQ_HOST:localhost}
+    virtualhost: ${RABBITMQ_VIRTUAL_HOST}
+    queue: reactor_rabbitMQ_queue
+    exchange: reactor_rabbitMQ_exchange
+    routing:
+      key: reactor_rabbitMQ_routing_key
+
+server:
+  error:
+    include-message: always
+    include-stacktrace: always
+  tomcat:
+    keep-alive-timeout: 10000
