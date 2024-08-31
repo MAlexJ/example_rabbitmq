@@ -1,7 +1,7 @@
 package com.malex.reactor_rabbitmq.handler;
 
 import com.malex.reactor_rabbitmq.event.MessageEvent;
-import com.malex.reactor_rabbitmq.producer.RabbitProducer;
+import com.malex.reactor_rabbitmq.producer.ReactiveRabbitProducer;
 import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class RoutingHandler {
 
-  private final RabbitProducer producer;
+  private final ReactiveRabbitProducer producer;
 
   public Mono<ServerResponse> create(ServerRequest request) {
     return request

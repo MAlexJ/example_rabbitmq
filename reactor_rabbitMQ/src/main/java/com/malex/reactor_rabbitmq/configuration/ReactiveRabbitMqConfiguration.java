@@ -18,7 +18,7 @@ import reactor.rabbitmq.SenderOptions;
 
 @Configuration
 @RequiredArgsConstructor
-public class RabbitMqConfiguration {
+public class ReactiveRabbitMqConfiguration {
 
   private static final String CONNECTION_NAME = "reactor-rabbit";
 

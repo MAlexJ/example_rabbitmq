@@ -16,7 +16,7 @@ import reactor.rabbitmq.Receiver;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class Consumer {
+public class ReactiveRabbitMqConsumer {
 
   private final Receiver receiver;
   private final ObjectMapper jsonMapper;

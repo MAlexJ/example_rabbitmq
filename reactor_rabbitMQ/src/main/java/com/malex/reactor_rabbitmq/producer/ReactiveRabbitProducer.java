@@ -20,7 +20,7 @@ import reactor.rabbitmq.Sender;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class RabbitProducer {
+public class ReactiveRabbitProducer {
 
   @Value("${custom.rabbitmq.queue}")
   private String queue;
