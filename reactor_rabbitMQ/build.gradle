@@ -38,10 +38,8 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    // https://mvnrepository.com/artifact/io.projectreactor.rabbitmq/reactor-rabbitmq
-    implementation 'io.projectreactor.rabbitmq:reactor-rabbitmq:1.5.6'
-    // https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
-    implementation 'jakarta.annotation:jakarta.annotation-api:3.0.0'
+    implementation "io.projectreactor.rabbitmq:reactor-rabbitmq:${reactorRabbitmqVersion}"
+    implementation "jakarta.annotation:jakarta.annotation-api:${jakartaAnnotationApiVersion}"
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
