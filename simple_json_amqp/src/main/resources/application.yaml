@@ -1,1 +1,23 @@
-spring.application.name=simple_json_amqp
+spring:
+  application:
+    name: simple_json_amqp
+
+  config:
+    import: optional:file:.env[.properties]
+
+  threads:
+    virtual:
+      enabled: true
+
+custom:
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    port: ${RABBITMQ_PORT:5672}
+    host: ${RABBITMQ_HOST:localhost}
+    virtualhost: ${RABBITMQ_VIRTUAL_HOST}
+    queue:
+      request: simple_json_queue
+    exchange: simple_json_exchange
+    routing:
+      key: simple_json_routing_key

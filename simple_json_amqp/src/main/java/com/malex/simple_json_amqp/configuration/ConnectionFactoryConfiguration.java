@@ -1,6 +1,5 @@
-package com.malex.async_remote_call.configuration;
+package com.malex.simple_json_amqp.configuration;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
@@ -33,8 +32,7 @@ public class ConnectionFactoryConfiguration {
 
   @Bean
   public MessageConverter jsonMessageConverter() {
-    ObjectMapper objectMapper = new ObjectMapper();
-    return new Jackson2JsonMessageConverter(objectMapper);
+    return new Jackson2JsonMessageConverter();
   }
 
   /*
@@ -44,7 +42,7 @@ public class ConnectionFactoryConfiguration {
    */
   @Bean
   public ConnectionFactory connectionFactory() {
-    CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
+    var connectionFactory = new CachingConnectionFactory();
     connectionFactory.setVirtualHost(virtualHost);
     connectionFactory.setHost(host);
     connectionFactory.setUsername(username);
@@ -60,7 +58,7 @@ public class ConnectionFactoryConfiguration {
 
   @Bean
   public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory() {
-    final SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+    var factory = new SimpleRabbitListenerContainerFactory();
 
     /*
      * Tell the broker how many messages to send to each consumer in a single request.
@@ -76,9 +74,8 @@ public class ConnectionFactoryConfiguration {
 
     factory.setConnectionFactory(connectionFactory());
     factory.setMessageConverter(jsonMessageConverter());
-    //    factory.setDefaultRequeueRejected(false);
     /*
-     * The acknowledge mode to set.
+     * The ack knowledge mode to set.
      * Defaults to AcknowledgeMode. AUTO
      * NONE - No acks - autoAck=true in Channel. basicConsume().
      * MANUAL - Manual acks - user must ack/ nack via a channel aware listener.

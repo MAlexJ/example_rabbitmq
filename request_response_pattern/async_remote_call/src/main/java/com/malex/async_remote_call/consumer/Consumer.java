@@ -2,7 +2,6 @@ package com.malex.async_remote_call.consumer;
 
 import com.malex.async_remote_call.model.MessageRequest;
 import com.rabbitmq.client.Channel;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -34,14 +33,7 @@ public class Consumer {
     String correlationId = message.getMessageProperties().getCorrelationId();
     log.info("  <<< Correlation Id: {}", correlationId);
 
-    sleep();
-
     return new MessageRequest(
         event.id(), "Replay: " + event.message() + ",correlationId: " + correlationId);
-  }
-
-  @SneakyThrows
-  private void sleep() {
-    Thread.sleep(3000);
   }
 }

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: async_remoute_call
+    name: async_remote_call
 
   threads:
     virtual:
@@ -17,11 +17,11 @@ custom:
     host: ${RABBITMQ_HOST:localhost}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
     queue:
-      request: async_remoute_call_queue
-      reply: async_remoute_call_reply_queue
-    exchange: async_remoute_call_exchange
+      request: async_remote_call_queue
+      reply: async_remote_call_reply_queue
+    exchange: async_remote_call_exchange
     routing:
-      key: async_remoute_call_routing_key
+      key: async_remote_call_routing_key
 
 server:
   error:
