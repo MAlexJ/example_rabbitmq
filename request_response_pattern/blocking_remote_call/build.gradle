@@ -18,8 +18,8 @@ plugins {
     id "com.github.ben-manes.versions" version "${benManesDependencyVersion}"
 }
 
-group = 'com.malex'
-version = '0.0.1-SNAPSHOT'
+group = "${buildGroup}"
+version = "${buildVersion}"
 
 java {
     sourceCompatibility = "${javaVersion}"

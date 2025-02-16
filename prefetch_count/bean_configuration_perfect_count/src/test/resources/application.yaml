@@ -4,6 +4,10 @@ spring:
   config:
     import: optional:file:.env[.properties]
 
+  threads:
+    virtual:
+      enabled: true
+
 custom:
   rabbitmq:
     username: ${RABBITMQ_USERNAME:***}
@@ -15,7 +19,3 @@ custom:
     exchange: bean_configuration_perfect_count_exchange
     routing:
       key: bean_configuration_perfect_count_routing_key
-
-  threads:
-    virtual:
-      enabled: true
