@@ -8,6 +8,7 @@ rootProject.name = 'rabbitmq-examples'
 include 'simple_json_amqp',
         'exchange_types',
         'amqp',
+        'stream',
         'queue_types',
         'dead_lettered',
         'acknowledgement_modes',
