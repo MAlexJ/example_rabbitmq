@@ -10,6 +10,8 @@
 
 Add rabbitMQ properties to `.env` file:
 
+for 
+
 ```
 RABBITMQ_HOST=cow.rmq2.cloudamqp.com
 RABBITMQ_PORT=5672

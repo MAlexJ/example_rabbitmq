@@ -8,6 +8,9 @@ build/
 *.DS_Store
 .profileconfig.json
 .env
+mnesia/
+rabbitmq_volume/
+.erlang.cookie
 
 # Log file
 *.log
