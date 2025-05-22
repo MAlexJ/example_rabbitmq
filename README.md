@@ -8,9 +8,7 @@
 
 #### Project configuration
 
-Add rabbitMQ properties to `.env` file:
-
-for 
+Add rabbitMQ properties to `.env` file for cloud rabbitmq
 
 ```
 RABBITMQ_HOST=cow.rmq2.cloudamqp.com
@@ -18,6 +16,16 @@ RABBITMQ_PORT=5672
 RABBITMQ_USERNAME=......
 RABBITMQ_PASSWORD=........
 RABBITMQ_VIRTUAL_HOST=......
+```
+
+for docker:
+
+```
+RABBITMQ_HOST=localhost
+RABBITMQ_PORT=5672
+RABBITMQ_USERNAME=tuser
+RABBITMQ_PASSWORD=tpassword
+RABBITMQ_VIRTUAL_HOST=/
 ```
 
 Note: for CloudAMQP RabbitMQ provider `RABBITMQ_VIRTUAL_HOST` is `RABBITMQ_USERNAME`
@@ -65,7 +73,7 @@ link: https://github.com/google/google-java-format/blob/master/README.md#intelli
 
 #### Github
 
-##### Github action
+##### GitHub action
 
 issue:  ./gradlew: Permission denied
 link: https://stackoverflow.com/questions/17668265/gradlew-permission-denied
@@ -74,7 +82,7 @@ You need to update the execution permission for gradlew
 
 1. add action workflow
 
-2. locally pull changes
+2. local pull changes
 
 3. run Git command:
 
