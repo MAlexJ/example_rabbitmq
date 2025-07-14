@@ -1,8 +1,8 @@
 package com.malexj.controller;
 
-import com.malexj.model.MessageRequest;
-import com.malexj.model.MessageResponse;
 import com.malexj.producer.Producer;
+import com.malexj.rest.EventRequest;
+import com.malexj.rest.EventResponse;
 import java.util.concurrent.CompletableFuture;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.RabbitConverterFuture;
@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/messages")
+@RequestMapping("/v1/events")
 @RequiredArgsConstructor
-public class ApiRestController {
+public class EventsRestController {
 
   private final Producer producer;
 
   @PostMapping
-  public CompletableFuture<ResponseEntity<MessageResponse>> sendMessage(
-      @RequestBody MessageRequest request) {
-    RabbitConverterFuture<MessageResponse> future = producer.sendWithFuture(request);
+  public CompletableFuture<ResponseEntity<EventResponse>> sendMessage(
+      @RequestBody EventRequest request) {
+
+    RabbitConverterFuture<EventResponse> future = producer.sendAsync(request);
     return future.thenApplyAsync(r -> ResponseEntity.ok().body(r));
   }
 }

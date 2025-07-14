@@ -1,7 +1,9 @@
 package com.malexj.consumer;
 
-import com.malexj.model.MessageRequest;
+import com.malexj.rest.EventRequest;
+import com.malexj.rest.EventResponse;
 import com.rabbitmq.client.Channel;
+import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
@@ -20,8 +22,8 @@ public class Consumer {
    * https://docs.spring.io/spring-amqp/reference/amqp/request-reply.html
    */
   @RabbitHandler
-  public MessageRequest handle(
-      MessageRequest event,
+  public EventResponse handle(
+      EventRequest event,
       Channel channel,
       Message message,
       @Header(AmqpHeaders.DELIVERY_TAG) long tag) {
@@ -33,7 +35,9 @@ public class Consumer {
     String correlationId = message.getMessageProperties().getCorrelationId();
     log.info("  <<< Correlation Id: {}", correlationId);
 
-    return new MessageRequest(
-        event.id(), "Replay: " + event.message() + ",correlationId: " + correlationId);
+    return new EventResponse(
+        "Replay to id: '%s', message:'%s', correlationId: '%s'"
+            .formatted(event.id(), event.message(), correlationId),
+        LocalDateTime.now());
   }
 }

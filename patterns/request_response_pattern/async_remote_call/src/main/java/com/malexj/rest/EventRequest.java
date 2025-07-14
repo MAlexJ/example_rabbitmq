@@ -1,10 +1,10 @@
-package com.malexj.model;
+package com.malexj.rest;
 
 import java.util.Objects;
 
-public record MessageRequest(Integer id, String message) {
+public record EventRequest(Integer id, String message) {
 
-  public MessageRequest {
+  public EventRequest {
     Objects.requireNonNull(id, "id cannot be null");
     Objects.requireNonNull(message, "message cannot be null");
   }

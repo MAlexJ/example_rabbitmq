@@ -32,8 +32,7 @@ public class ConnectionFactoryConfiguration {
   private String virtualHost;
 
   @Bean
-  public MessageConverter jsonMessageConverter() {
-    ObjectMapper objectMapper = new ObjectMapper();
+  public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
     return new Jackson2JsonMessageConverter(objectMapper);
   }
 
@@ -59,7 +58,9 @@ public class ConnectionFactoryConfiguration {
   }
 
   @Bean
-  public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory() {
+  public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(
+      ConnectionFactory connectionFactory, //
+      MessageConverter jsonMessageConverter) {
     final SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
 
     /*
@@ -74,8 +75,8 @@ public class ConnectionFactoryConfiguration {
      */
     factory.setPrefetchCount(1);
 
-    factory.setConnectionFactory(connectionFactory());
-    factory.setMessageConverter(jsonMessageConverter());
+    factory.setConnectionFactory(connectionFactory);
+    factory.setMessageConverter(jsonMessageConverter);
     //    factory.setDefaultRequeueRejected(false);
     /*
      * The acknowledge mode to set.
