@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.utils.SerializationUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import reactor.core.Disposable;
 import reactor.rabbitmq.Receiver;
 
 @Slf4j
@@ -32,16 +31,15 @@ public class ReactiveRabbitMqConsumer {
   /*
    * Consume messages from the queue
    */
-  public Disposable consume() {
-
-    return receiver
+  public void consume() {
+    receiver
         .consumeAutoAck(queue)
         .subscribe(
             delivery -> {
               AMQP.BasicProperties properties = delivery.getProperties();
               byte[] body = delivery.getBody();
 
-              // 1. Deserialize byte to json
+              // 1. Deserialize byte to JSON
               String json = (String) SerializationUtils.deserialize(body);
 
               // 2. map json to Order object
@@ -56,7 +54,7 @@ public class ReactiveRabbitMqConsumer {
                 */
 
               } catch (JsonProcessingException e) {
-                e.printStackTrace();
+                log.error(e.getMessage(), e);
               }
             });
   }
