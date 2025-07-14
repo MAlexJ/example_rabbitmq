@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AsyncRabbitTemplateConfiguration {
 
-
   @Value("${custom.rabbitmq.queue.reply}")
   private String replyQueue;
 
@@ -30,11 +29,11 @@ public class AsyncRabbitTemplateConfiguration {
   @Bean
   public AsyncRabbitTemplate asyncRabbitTemplate(
       ConnectionFactory connectionFactory, //
-      MessageConverter messageConverter //
+      MessageConverter jsonMessageConverter //
       ) {
 
     RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-    rabbitTemplate.setMessageConverter(messageConverter);
+    rabbitTemplate.setMessageConverter(jsonMessageConverter);
 
     /*
      * Configures request direct exchange and routing key
@@ -50,32 +49,4 @@ public class AsyncRabbitTemplateConfiguration {
 
     return new AsyncRabbitTemplate(rabbitTemplate);
   }
-
-
-
-  /*
-   * Configures and creates a {@link RabbitTemplate} bean.
-   *
-   * @param connectionFactory the RabbitMQ connection factory.
-   * @param jsonMessageConverter the message converter for handling JSON messages.
-   * @return a configured instance of {@link RabbitTemplate}.
-   */
-  //  @Bean
-  //  public RabbitTemplate rabbitTemplate(
-  //          ConnectionFactory connectionFactory, MessageConverter jsonMessageConverter) {
-  //    final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-  //    rabbitTemplate.setMessageConverter(jsonMessageConverter);
-  //
-  //    //
-  //    rabbitTemplate.setExchange(exchange);
-  //    rabbitTemplate.setRoutingKey(routingKey);
-  //
-  //    /*
-  //     * Configures the reply queue and timeout settings for handling request-reply messaging.
-  //     */
-  //    rabbitTemplate.setReplyAddress(replyQueue);
-  //    rabbitTemplate.setReplyTimeout(5000);
-  //
-  //    return rabbitTemplate;
-  //  }
 }

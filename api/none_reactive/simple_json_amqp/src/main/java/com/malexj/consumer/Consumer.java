@@ -1,6 +1,6 @@
 package com.malexj.consumer;
 
-import com.malexj.dto.MessageEvent;
+import com.malexj.rest.MessageEvent;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;

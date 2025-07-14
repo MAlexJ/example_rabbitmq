@@ -1,6 +1,5 @@
-package com.malexj.controller;
+package com.malexj.rest;
 
-import com.malexj.dto.MessageEvent;
 import com.malexj.producer.Producer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/messages")
 @RequiredArgsConstructor
-public class RestApiController {
+public class MessageRestController {
 
   public final Producer producer;
 

@@ -1,6 +1,6 @@
 package com.malexj.producer;
 
-import com.malexj.dto.MessageEvent;
+import com.malexj.rest.MessageEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
