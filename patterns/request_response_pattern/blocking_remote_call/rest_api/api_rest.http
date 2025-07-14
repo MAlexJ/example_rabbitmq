@@ -1,0 +1,8 @@
+### send message
+POST http://localhost:8080/v1/messages
+Content-Type: application/json
+
+{
+  "id": 1012,
+  "text": "Hello java!"
+}

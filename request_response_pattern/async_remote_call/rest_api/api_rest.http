@@ -1,8 +1,0 @@
-### create uset id=1
-POST http://localhost:8080/v1/messages
-Content-Type: application/json
-
-{
-  "id": 34567,
-  "message": "Hello java!!!"
-}

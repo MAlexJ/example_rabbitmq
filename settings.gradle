@@ -5,13 +5,14 @@ plugins {
 
 rootProject.name = 'example_rabbitmq'
 
-include 'api:reactive',
+include 'api:reactive:simple_json',
         'api:none_reactive:simple_json_amqp',
         'exchange_types:direct',
         'exchange_types:fanout',
         'exchange_types:headers',
         'exchange_types:topic',
-        'patterns',
+        'patterns:request_response_pattern:async_remote_call',
+        'patterns:request_response_pattern:blocking_remote_call',
         'patterns:dead_lettered',
         'amqp',
         'stream',
@@ -22,7 +23,4 @@ include 'api:reactive',
         'acknowledgement',
         'pull_vs_push_approach',
         'prefetch_count:bean_configuration_perfect_count',
-        'prefetch_count:rabbit_properties_prefetch_count',
-        'request_response_pattern:blocking_remote_call',
-        'request_response_pattern:async_remote_call',
-        'reactor_rabbitMQ'
+        'prefetch_count:rabbit_properties_prefetch_count'
