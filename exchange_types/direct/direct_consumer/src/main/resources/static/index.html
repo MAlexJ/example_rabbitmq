@@ -25,43 +25,33 @@
     const {useState, useEffect} = React;
 
     const App = () => {
-        const [quotes, setQuotes] = useState({});
+        const [events, setEvents] = useState({});
 
         useEffect(() => {
-            const source = new EventSource("/quotes");
-            source.onmessage = (event) => {
+            const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+            const host = window.location.host; // includes domain + port
+            const socket = new WebSocket(`${protocol}://${host}/events`);
+            socket.onmessage = (event) => {
                 const data = JSON.parse(event.data);
-                setQuotes((prev) => ({
+                setEvents((prev) => ({
                     ...prev,
-                    [data.id]: {...prev[data.id], price: data.price, time: data.time},
+                    [data.id]: {...prev[data.id], message: data.message, time: data.timestamp},
                 }));
             };
-            return () => source.close();
+            return () => socket.close();
         }, []);
-
-        const requestQuote = async () => {
-            const res = await fetch("/quotes/request", {method: "POST"});
-            const id = await res.text();
-            setQuotes((prev) => ({
-                ...prev,
-                [id]: {id, status: "Pending"},
-            }));
-        };
 
         return (
             <div className="container">
                 <div className="card">
                     <div className="card-body">
-                        <h2 className="card-title">Quotes</h2>
-                        <button className="btn btn-info" onClick={requestQuote}>
-                            Request Quote
-                        </button>
+                        <h2 className="card-title">Events</h2>
                         <div className="quotes mt-3">
-                            {Object.entries(quotes).map(([id, q]) => (
+                            {Object.entries(events).map(([id, q]) => (
                                 <h4 className="col-md-12" key={id}>
-                                    Quote # <i>{id}</i> |{" "}
+                                    ID # <i>{id}</i> |{" "}
                                     <strong>
-                                        {q.price ? `$ ${q.price}, time: ${q.time}` : "Pending"}
+                                        {q.message ? `message: ${q.message}, time: ${q.time}` : "Pending"}
                                     </strong>
                                 </h4>
                             ))}
