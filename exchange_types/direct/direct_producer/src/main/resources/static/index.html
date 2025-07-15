@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Events REST service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- A beautiful CSS framework designed for minimalists. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css"/>
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>REST Service Events</h1>
+    <div id="root"></div>
+</div>
+
+<script type="text/babel">
+
+    function FruitApp() {
+        const [form, setForm] = React.useState({message: ""});
+        const [events, setEvents] = React.useState([]);
+
+        React.useEffect(() => {
+            fetchFruits();
+        }, []);
+
+        const fetchFruits = () => {
+            fetch("/v1/events")
+                .then(res => res.json())
+                .then(data => setEvents(data))
+                .catch(err => alert("Failed to fetch fruits: " + err));
+        };
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            fetch("/v1/events", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(form)
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to save");
+                    return res.json();
+                })
+                .then(() => {
+                    setForm({message: ""});
+                    fetchFruits();
+                })
+                .catch(err => alert(err.message));
+        };
+
+        return (
+            <div>
+                <h3>Add an event</h3>
+                <form onSubmit={handleSubmit}>
+                    <div className="row">
+                        <div className="col-6">
+                            <label>
+                                <input
+                                    type="text"
+                                    placeholder="Message"
+                                    value={form.message}
+                                    onChange={(e) => setForm({...form, message: e.target.value})}
+                                />
+                            </label>
+                        </div>
+                    </div>
+                    <input type="submit" value="Save"/>
+                </form>
+
+                <h3>Events</h3>
+                <div className="row">
+                    <div className="col-4"><strong>Id</strong></div>
+                    <div className="col-4"><strong>Message</strong></div>
+                    <div className="col-4"><strong>Timestamp</strong></div>
+                </div>
+                {events.map((event, index) => (
+                    <div className="row" key={index}>
+                        <div className="col-4">{event.id}</div>
+                        <div className="col-4">{event.message}</div>
+                        <div className="col-4">{event.timestamp}</div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<FruitApp/>);
+</script>
+</body>
+</html>

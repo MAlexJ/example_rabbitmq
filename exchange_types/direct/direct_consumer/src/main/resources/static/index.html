@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Quotes</title>
+
+    <!-- PatternFly CSS -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly.min.css"
+    />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.24.0/css/patternfly-additions.min.css"
+    />
+
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<!-- App Code -->
+<script type="text/babel">
+    const {useState, useEffect} = React;
+
+    const App = () => {
+        const [quotes, setQuotes] = useState({});
+
+        useEffect(() => {
+            const source = new EventSource("/quotes");
+            source.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                setQuotes((prev) => ({
+                    ...prev,
+                    [data.id]: {...prev[data.id], price: data.price, time: data.time},
+                }));
+            };
+            return () => source.close();
+        }, []);
+
+        const requestQuote = async () => {
+            const res = await fetch("/quotes/request", {method: "POST"});
+            const id = await res.text();
+            setQuotes((prev) => ({
+                ...prev,
+                [id]: {id, status: "Pending"},
+            }));
+        };
+
+        return (
+            <div className="container">
+                <div className="card">
+                    <div className="card-body">
+                        <h2 className="card-title">Quotes</h2>
+                        <button className="btn btn-info" onClick={requestQuote}>
+                            Request Quote
+                        </button>
+                        <div className="quotes mt-3">
+                            {Object.entries(quotes).map(([id, q]) => (
+                                <h4 className="col-md-12" key={id}>
+                                    Quote # <i>{id}</i> |{" "}
+                                    <strong>
+                                        {q.price ? `$ ${q.price}, time: ${q.time}` : "Pending"}
+                                    </strong>
+                                </h4>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<App/>);
+</script>
+</body>
+</html>
