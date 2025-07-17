@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: fanout_producer
+
+  config:
+    import: optional:file:.env[.properties]
+
+  threads:
+    virtual:
+      enabled: true
+
+custom:
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    port: ${RABBITMQ_PORT}
+    host: ${RABBITMQ_HOST}
+    virtualhost: ${RABBITMQ_VIRTUAL_HOST}
+    exchange: fanout_producer_exchange
+    queue:
+      first: fanout_producer_queue_first
+      second: fanout_producer_queue_second

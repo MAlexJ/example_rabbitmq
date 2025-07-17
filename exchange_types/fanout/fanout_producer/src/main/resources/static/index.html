@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>News service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- A beautiful CSS framework designed for minimalists. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css"/>
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>REST Service</h1>
+    <div id="root"></div>
+</div>
+
+<script type="text/babel">
+
+    function FruitApp() {
+        const [form, setForm] = React.useState({message: ""});
+        const [news, setNews] = React.useState([]);
+
+        React.useEffect(() => {
+            fetchNews();
+        }, []);
+
+        const fetchNews = () => {
+            fetch("/v1/news")
+                .then(res => res.json())
+                .then(data => setNews(data))
+                .catch(err => alert("Failed to fetch fruits: " + err));
+        };
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            fetch("/v1/news", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(form)
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to save");
+                    return res.json();
+                })
+                .then(() => {
+                    setForm({title: "", content: ""});
+                    fetchNews();
+                })
+                .catch(err => alert(err.message));
+        };
+
+        return (
+            <div>
+                <h3>Add an news</h3>
+                <form onSubmit={handleSubmit}>
+                    <div className="row">
+                        <div className="col-4">
+                            <label>
+                                <input
+                                    type="text"
+                                    placeholder="Title"
+                                    value={form.title}
+                                    onChange={(e) => setForm({...form, title: e.target.value})}
+                                />
+                            </label>
+                        </div>
+                        <div className="col-4">
+                            <label>
+                                <input
+                                    type="text"
+                                    placeholder="Content"
+                                    value={form.content}
+                                    onChange={(e) => setForm({...form, content: e.target.value})}
+                                />
+                            </label>
+                        </div>
+                        <div className="col-4">
+                            <input type="submit" value="Save"></input>
+                        </div>
+                    </div>
+                </form>
+
+                <h3>News</h3>
+                <div className="row">
+                    <div className="col-3"><strong>Id</strong></div>
+                    <div className="col-3"><strong>Title</strong></div>
+                    <div className="col-3"><strong>Content</strong></div>
+                    <div className="col-3"><strong>Timestamp</strong></div>
+                </div>
+                {news.map((n, index) => (
+                    <div className="row" key={index}>
+                        <div className="col-3">{n.id}</div>
+                        <div className="col-3">{n.title}</div>
+                        <div className="col-3">{n.content}</div>
+                        <div className="col-3">{n.timestamp}</div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+        <FruitApp/>
+    );
+</script>
+</body>
+</html>

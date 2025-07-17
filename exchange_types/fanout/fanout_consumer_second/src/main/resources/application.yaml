@@ -1,0 +1,24 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: fanout_consumer_second
+
+  config:
+    import: optional:file:.env[.properties]
+
+  threads:
+    virtual:
+      enabled: true
+
+custom:
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    port: ${RABBITMQ_PORT}
+    host: ${RABBITMQ_HOST}
+    virtualhost: ${RABBITMQ_VIRTUAL_HOST}
+    exchange: direct_producer_exchange
+    routing_key: direct_producer_routing_key
+    queue: direct_producer_queue

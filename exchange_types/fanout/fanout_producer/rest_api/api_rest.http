@@ -1,0 +1,8 @@
+### create uset id=1
+POST http://localhost:8080/v1/news
+Content-Type: application/json
+
+{
+  "title": "Title 3",
+  "content": "News content"
+}
