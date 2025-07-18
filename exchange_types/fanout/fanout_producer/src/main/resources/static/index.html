@@ -7,8 +7,8 @@
     <!-- A beautiful CSS framework designed for minimalists. -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css"/>
     <!-- React & Babel -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
@@ -16,11 +16,10 @@
     <h1>REST Service</h1>
     <div id="root"></div>
 </div>
-
-<script type="text/babel">
-
-    function FruitApp() {
-        const [form, setForm] = React.useState({message: ""});
+<script type="text/babel" defer>
+    function NewsApp() {
+        const initialForm = {title: "", content: ""};
+        const [form, setForm] = React.useState(initialForm);
         const [news, setNews] = React.useState([]);
 
         React.useEffect(() => {
@@ -31,7 +30,7 @@
             fetch("/v1/news")
                 .then(res => res.json())
                 .then(data => setNews(data))
-                .catch(err => alert("Failed to fetch fruits: " + err));
+                .catch(err => alert("Failed to fetch news: " + err));
         };
 
         const handleSubmit = (e) => {
@@ -45,16 +44,16 @@
                     if (!res.ok) throw new Error("Failed to save");
                     return res.json();
                 })
-                .then(() => {
+                .then((savedNews) => {
                     setForm({title: "", content: ""});
-                    fetchNews();
+                    // fetchNews();
+                    setNews(prevNews => [...prevNews, savedNews]);
                 })
                 .catch(err => alert(err.message));
         };
-
         return (
             <div>
-                <h3>Add an news</h3>
+                <h3>Add News</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-4">
@@ -103,7 +102,7 @@
     }
 
     ReactDOM.createRoot(document.getElementById('root')).render(
-        <FruitApp/>
+        <NewsApp/>
     );
 </script>
 </body>

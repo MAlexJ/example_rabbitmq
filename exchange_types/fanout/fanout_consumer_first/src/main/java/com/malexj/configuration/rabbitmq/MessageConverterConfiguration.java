@@ -1,7 +1,7 @@
 package com.malexj.configuration.rabbitmq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.malexj.consumer.Event;
+import com.malexj.consumer.News;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.amqp.support.converter.DefaultJackson2JavaTypeMapper;
@@ -35,7 +35,7 @@ public class MessageConverterConfiguration {
   /*
    * When using Jackson2JsonMessageConverter, Spring AMQP (and its DefaultJackson2JavaTypeMapper)
    * includes the fully qualified class name in the message header:
-   * __TypeId__: com.malexj.producer.Event
+   * __TypeId__: com.malexj.producer.News
    */
   @Bean
   public DefaultJackson2JavaTypeMapper typeMapper() {
@@ -43,7 +43,7 @@ public class MessageConverterConfiguration {
     // Map remote type to local type
     var typeMapper = new DefaultJackson2JavaTypeMapper();
     Map<String, Class<?>> idClassMapping = new HashMap<>();
-    idClassMapping.put("com.malexj.producer.Event", Event.class);
+    idClassMapping.put("com.malexj.producer.News", News.class);
 
     typeMapper.setIdClassMapping(idClassMapping);
     return typeMapper;

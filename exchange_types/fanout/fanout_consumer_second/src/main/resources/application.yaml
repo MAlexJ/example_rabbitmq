@@ -19,6 +19,5 @@ custom:
     port: ${RABBITMQ_PORT}
     host: ${RABBITMQ_HOST}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
-    exchange: direct_producer_exchange
-    routing_key: direct_producer_routing_key
-    queue: direct_producer_queue
+    queue:
+      second: fanout_producer_queue_second

@@ -16,13 +16,37 @@ public class Producer {
 
   private final RabbitTemplate rabbitTemplate;
 
+  /**
+   * Creates a News object, stores it in memory, and sends it via RabbitMQ.
+   *
+   * @param title the news title
+   * @param content the news content
+   * @return the created News object
+   */
   public News publish(String title, String content) {
-    var news = new News(counter.incrementAndGet(), title, content, LocalDateTime.now());
-    holder.add(news);
+    var news = createAndSaveNews(title, content);
     rabbitTemplate.convertAndSend(news);
     return news;
   }
 
+  /**
+   * Creates a News object with an incremented ID and timestamp, then stores it in memory.
+   *
+   * @param title the news title
+   * @param content the news content
+   * @return the created News object
+   */
+  private News createAndSaveNews(String title, String content) {
+    var news = new News(counter.incrementAndGet(), title, content, LocalDateTime.now());
+    holder.add(news);
+    return news;
+  }
+
+  /**
+   * Returns all stored news.
+   *
+   * @return a list of all news
+   */
   public List<News> findAll() {
     return holder;
   }
