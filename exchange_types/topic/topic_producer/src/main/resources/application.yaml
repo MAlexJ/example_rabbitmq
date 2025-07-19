@@ -17,16 +17,19 @@ spring:
       enabled: true
 
   rabbitmq:
-    # Routing failure feedback
-    publisher-returns: true
-    publisher-confirm-type: correlated
-
-custom:
-  rabbitmq:
     username: ${RABBITMQ_USERNAME}
     password: ${RABBITMQ_PASSWORD}
     port: ${RABBITMQ_PORT}
     host: ${RABBITMQ_HOST}
-    virtualhost: ${RABBITMQ_VIRTUAL_HOST}
+    publisher-returns: true
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+
+custom:
+  rabbitmq:
+#    username: ${RABBITMQ_USERNAME}
+#    password: ${RABBITMQ_PASSWORD}
+#    port: ${RABBITMQ_PORT}
+#    host: ${RABBITMQ_HOST}
+#    virtualhost: ${RABBITMQ_VIRTUAL_HOST}
     exchange: topic_producer_exchange
     routing_key: topic_producer.events.*

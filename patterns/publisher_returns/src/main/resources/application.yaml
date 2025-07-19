@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: publisher_returns
+
+  config:
+    import: optional:file:.env[.properties]
+
+  threads:
+    virtual:
+      enabled: true
+
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    port: ${RABBITMQ_PORT}
+    host: ${RABBITMQ_HOST}
+    publisher-returns: true
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+
+custom:
+  rabbitmq_exchange: test.topic.exchange
+

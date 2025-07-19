@@ -22,6 +22,15 @@ public class TemplateConfiguration {
     rabbitTemplate.setConnectionFactory(connectionFactory);
     rabbitTemplate.setMessageConverter(jsonMessageConverter);
     rabbitTemplate.setExchange(exchange);
+    rabbitTemplate.setMandatory(true);
+    rabbitTemplate.setReturnsCallback(
+        returned -> {
+          log.error(">>> Returned message body: {}", new String(returned.getMessage().getBody()));
+          log.error(">>> Reply code: {}", returned.getReplyCode());
+          log.error(">>> Reply text: {}", returned.getReplyText());
+          log.error(">>> Exchange: {}", returned.getExchange());
+          log.error(">>> Routing key: {}", returned.getRoutingKey());
+        });
     return rabbitTemplate;
   }
 }
