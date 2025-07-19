@@ -1,13 +1,9 @@
 server:
-  port: 8080
-  error:
-    include-message: always
-    whitelabel:
-      enabled: true
+  port: 8081
 
 spring:
   application:
-    name: topic_producer
+    name: topic_consumer_orders
 
   config:
     import: optional:file:.env[.properties]
@@ -15,11 +11,6 @@ spring:
   threads:
     virtual:
       enabled: true
-
-  rabbitmq:
-    # Routing failure feedback
-    publisher-returns: true
-    publisher-confirm-type: correlated
 
 custom:
   rabbitmq:
@@ -29,4 +20,5 @@ custom:
     host: ${RABBITMQ_HOST}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
     exchange: topic_producer_exchange
-    routing_key: topic_producer.events.*
+    queue:
+      orders: topic_producer_queue_orders
