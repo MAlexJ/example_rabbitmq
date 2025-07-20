@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ExchangeConfiguration {
+public class DirectExchangeConfiguration {
 
   @Value("${custom.rabbitmq.exchange}")
   private String exchange;

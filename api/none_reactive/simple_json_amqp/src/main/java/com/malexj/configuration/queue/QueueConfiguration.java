@@ -12,9 +12,6 @@ public class QueueConfiguration {
   @Value("${custom.rabbitmq.queue.request}")
   private String queue;
 
-  @Value("${custom.rabbitmq.exchange}")
-  private String exchange;
-
   @Bean
   public Queue queue() {
     /*

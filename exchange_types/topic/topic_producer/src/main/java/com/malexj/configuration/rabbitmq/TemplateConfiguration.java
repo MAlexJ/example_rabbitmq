@@ -1,4 +1,4 @@
-package com.malexj.configuration.rabbitmq.connection;
+package com.malexj.configuration.rabbitmq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;

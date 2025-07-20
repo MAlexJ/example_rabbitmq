@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+logging:
+  level:
+    org.springframework.amqp.rabbit.core.RabbitTemplate: INFO
+    org.springframework.amqp.rabbit.connection.CachingConnectionFactory: INFO
+    org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer: INFO
+
+spring:
+  application:
+    name: custom_configuration_producer
+
+  config:
+    import: optional:file:.env[.properties]
+
+  threads:
+    virtual:
+      enabled: true
+
+custom:
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    port: ${RABBITMQ_PORT:5672}
+    host: ${RABBITMQ_HOST:localhost}
+    virtualhost: ${RABBITMQ_VIRTUAL_HOST}
+    exchange: custom_configuration_producer_exchange
+    routing_key: custom_configuration_producer_routing_key.*

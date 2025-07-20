@@ -9,13 +9,15 @@ spring:
     virtual:
       enabled: true
 
-custom:
   rabbitmq:
     username: ${RABBITMQ_USERNAME}
     password: ${RABBITMQ_PASSWORD}
     port: ${RABBITMQ_PORT:5672}
     host: ${RABBITMQ_HOST:localhost}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
+
+custom:
+  rabbitmq:
     exchange: simple_json_exchange
     routing:
       key: simple_json_routing_key

@@ -1,4 +1,4 @@
-package com.malexj.configuration.rabbitmq.connection;
+package com.malexj.configuration.rabbitmq;
 
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;

@@ -6,7 +6,8 @@ plugins {
 rootProject.name = 'example_rabbitmq'
 
 include 'api:reactive:simple_json',
-        'api:none_reactive:custom_configuration',
+        'api:none_reactive:custom_configuration:consumer',
+        'api:none_reactive:custom_configuration:producer',
         'api:none_reactive:simple_json_amqp',
         'exchange_types:direct:direct_consumer',
         'exchange_types:direct:direct_producer',

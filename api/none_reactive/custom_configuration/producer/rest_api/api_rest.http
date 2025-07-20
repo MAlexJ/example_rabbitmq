@@ -1,0 +1,7 @@
+### create uset id=1
+POST http://localhost:8080/v1/events
+Content-Type: application/json
+
+{
+  "text": "Simple json"
+}
