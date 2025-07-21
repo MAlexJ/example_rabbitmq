@@ -19,17 +19,13 @@ public class Producer {
   public void publish(Event event) {
     var type = event.type();
     switch (type) {
-      case ALL -> {
-        log.info("Send message to all consumers, routing key {}", baseRoutingKey);
-        rabbitTemplate.convertAndSend(baseRoutingKey, event);
-      }
       case USER -> {
-        var usersRoutingKey = baseRoutingKey.replace("*", "users");
+        var usersRoutingKey = baseRoutingKey + ".users";
         log.info("Send message to user with routing key {}", usersRoutingKey);
         rabbitTemplate.convertAndSend(usersRoutingKey, event);
       }
       case ORDER -> {
-        var ordersRoutingKey = baseRoutingKey.replace("*", "orders");
+        var ordersRoutingKey = baseRoutingKey + ".orders";
         log.info("Send message to orders with routing key {}", ordersRoutingKey);
         rabbitTemplate.convertAndSend(ordersRoutingKey, event);
       }

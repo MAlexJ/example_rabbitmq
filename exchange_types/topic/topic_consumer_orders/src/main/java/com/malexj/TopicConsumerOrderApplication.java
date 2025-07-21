@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TopicConsumerFirstApplication {
+public class TopicConsumerOrderApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(TopicConsumerFirstApplication.class, args);
+    SpringApplication.run(TopicConsumerOrderApplication.class, args);
   }
 }

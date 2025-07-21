@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8082
 
 spring:
   application:
@@ -20,5 +20,6 @@ custom:
     host: ${RABBITMQ_HOST}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
     exchange: topic_producer_exchange
+    routing_key: topic_producer.events.users
     queue:
       users: topic_producer_queue_users

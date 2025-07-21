@@ -1,4 +1,4 @@
-package com.malexj.configuration.rabbitmq.autoconfiguration;
+package com.malexj.configuration.autoconfiguration;
 
 import org.springframework.amqp.core.ExchangeBuilder;
 import org.springframework.amqp.core.TopicExchange;
@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * if it is present in the context.
  */
 @Configuration
-public class ExchangeConfiguration {
+public class TopicExchangeConfiguration {
 
   @Value("${custom.rabbitmq.exchange}")
   private String exchange;
@@ -25,9 +25,6 @@ public class ExchangeConfiguration {
    */
   @Bean
   public TopicExchange topicExchange() {
-    return ExchangeBuilder.topicExchange(exchange)
-        // Makes the exchange durable, meaning it will survive broker restarts.
-        .durable(true)
-        .build();
+    return ExchangeBuilder.topicExchange(exchange).build();
   }
 }

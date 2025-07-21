@@ -4,8 +4,7 @@ import java.util.Arrays;
 
 public enum EventType {
   ORDER,
-  USER,
-  ALL;
+  USER;
 
   public static EventType findByName(String type) {
     return Arrays.stream(values())

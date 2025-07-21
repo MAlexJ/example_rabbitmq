@@ -20,5 +20,6 @@ custom:
     host: ${RABBITMQ_HOST}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
     exchange: topic_producer_exchange
+    routing_key: topic_producer.events.orders
     queue:
       orders: topic_producer_queue_orders

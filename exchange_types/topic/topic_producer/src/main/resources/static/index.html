@@ -18,7 +18,7 @@
 </div>
 <script type="text/babel" defer>
     function NewsApp() {
-        const initialForm = {message: "", type: "ALL"};
+        const initialForm = {message: "", type: "USER"};
         const [form, setForm] = React.useState(initialForm);
         const [events, setEvents] = React.useState([]);
 
@@ -46,7 +46,7 @@
                 })
                 .then((savedEvents) => {
                     // reset form
-                    setForm({message: "", type: "ALL"});
+                    setForm({message: "", type: "USER"});
                     // fetchNews();
                     setEvents(prevNews => [...prevNews, savedEvents]);
                 })
@@ -73,7 +73,6 @@
                                     style={{height: "40px"}}
                                     value={form.type}
                                     onChange={(e) => setForm({...form, type: e.target.value})}>
-                                    <option value="ALL">ALL</option>
                                     <option value="ORDER">ORDER</option>
                                     <option value="USER">USER</option>
                                 </select>
