@@ -59,6 +59,9 @@ public class ConnectionFactoryConfiguration {
     return connectionFactory;
   }
 
+  /*
+   * Setup base configuration
+   */
   private CachingConnectionFactory buildCachingConnectionFactory() {
     final var connectionFactory = new CachingConnectionFactory();
     connectionFactory.setHost(host);

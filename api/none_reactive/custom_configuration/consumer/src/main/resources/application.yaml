@@ -18,15 +18,17 @@ spring:
     virtual:
       enabled: true
 
-custom:
   rabbitmq:
     username: ${RABBITMQ_USERNAME}
     password: ${RABBITMQ_PASSWORD}
     port: ${RABBITMQ_PORT:5672}
     host: ${RABBITMQ_HOST:localhost}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
-    exchange: simple_json_exchange
-    routing:
-      key: simple_json_routing_key
-    queue:
-      request: simple_json_queue
+
+custom:
+  rabbitmq:
+    # In topic exchanges, consumers should use wildcard binding keys
+    # to match the routing keys producers actually use
+    routing_key: custom_configuration_producer_routing_key.*
+    queue: custom_configuration_producer_queue
+    exchange: custom_configuration_producer_exchange

@@ -1,4 +1,4 @@
-package com.malexj.configuration.queue;
+package com.malexj.configuration.autoconfiguration;
 
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.ExchangeBuilder;

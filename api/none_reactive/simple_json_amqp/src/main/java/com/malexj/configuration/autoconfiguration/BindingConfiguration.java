@@ -1,4 +1,4 @@
-package com.malexj.configuration.queue;
+package com.malexj.configuration.autoconfiguration;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

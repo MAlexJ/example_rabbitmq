@@ -1,4 +1,4 @@
-package com.malexj.configuration.queue;
+package com.malexj.configuration.autoconfiguration;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class QueueConfiguration {
 
-  @Value("${custom.rabbitmq.queue.request}")
+  @Value("${custom.rabbitmq.queue}")
   private String queue;
 
   @Bean
@@ -22,6 +22,11 @@ public class QueueConfiguration {
      *
      * A message that has been in the queue for longer than the configured TTL is said to be expired.
      */
-    return QueueBuilder.durable(queue).ttl(2000).build();
+    return QueueBuilder.durable(queue)
+        /*
+         * 1 hour = 60 minutes * 60 seconds * 1000 ms = 3,600,000 ms
+         */
+        .ttl(3600000) // 1 hour in milliseconds
+        .build();
   }
 }

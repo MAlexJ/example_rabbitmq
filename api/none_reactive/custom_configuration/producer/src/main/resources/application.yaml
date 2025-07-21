@@ -26,4 +26,4 @@ custom:
     host: ${RABBITMQ_HOST:localhost}
     virtualhost: ${RABBITMQ_VIRTUAL_HOST}
     exchange: custom_configuration_producer_exchange
-    routing_key: custom_configuration_producer_routing_key.*
+    routing_key: custom_configuration_producer_routing_key.consumer

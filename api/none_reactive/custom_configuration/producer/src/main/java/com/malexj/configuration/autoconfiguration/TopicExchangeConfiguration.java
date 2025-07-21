@@ -13,15 +13,13 @@ import org.springframework.context.annotation.Configuration;
  * if it is present in the context.
  */
 @Configuration
-public class ExchangeConfiguration {
+public class TopicExchangeConfiguration {
 
   @Value("${custom.rabbitmq.exchange}")
   private String exchange;
 
-  /**
+  /*
    * Declares a {@link TopicExchange} using the configured exchange name.
-   *
-   * @return a {@link TopicExchange} built with {@link ExchangeBuilder}
    */
   @Bean
   public TopicExchange topicExchange() {

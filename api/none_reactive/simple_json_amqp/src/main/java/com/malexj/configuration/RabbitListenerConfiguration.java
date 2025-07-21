@@ -1,4 +1,4 @@
-package com.malexj.configuration.connection;
+package com.malexj.configuration;
 
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;

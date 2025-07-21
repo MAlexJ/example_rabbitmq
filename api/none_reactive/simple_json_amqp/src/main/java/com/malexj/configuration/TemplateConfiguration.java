@@ -1,4 +1,4 @@
-package com.malexj.configuration.connection;
+package com.malexj.configuration;
 
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
