@@ -1,10 +1,10 @@
 ### Spring configuration
 
-1. Set-up application yaml
+1. Add the configuration to `application.yaml` file
 
 link: https://stackoverflow.com/questions/37557622/is-it-possible-to-set-prefetch-count-on-rabbitlistener
 
-Configuration properties for Rabbit:
+Configuration app properties for Rabbit jars:
 
 ```
 @ConfigurationProperties(prefix = "spring.rabbitmq")
@@ -25,7 +25,7 @@ public class RabbitProperties {
 }
 ```
 
-Maximum number of unacknowledged messages that can be outstanding at each consumer.
+The Maximum number of unacknowledged messages that can be outstanding at each consumer.
 
 configuration:
 

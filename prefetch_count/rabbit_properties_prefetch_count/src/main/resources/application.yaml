@@ -15,10 +15,10 @@ spring:
     username: ${RABBITMQ_USERNAME}
     password: ${RABBITMQ_PASSWORD}
     virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+    # The Maximum number of unacknowledged messages that can be outstanding at each consumer.
     listener:
       simple:
         prefetch: 1
-
 
 custom:
   rabbitmq:

@@ -2,13 +2,13 @@
 
 link: https://www.rabbitmq.com/docs/consumer-prefetch
 
-AMQP 0-9-1 specifies the basic.qos method to make it possible to limit number of unacknowledged messages on channel
+AMQP 0-9-1 specifies the basic.qos method to make it possible to limit number of unacknowledged messages on a channel
 (or connection) when consuming (aka "prefetch count").
-Unfortunately the channel is not the ideal scope for this - since a single channel may consume from multiple queues,
-the channel and queue(s) need to coordinate with each other for every message sent to ensure they don't go over limit.
+Unfortunately, the channel is not the ideal scope for this since a single channel may consume from multiple queues,
+the channel and queue(s) need to coordinate with each other for every message sent to ensure they don't go over the limit.
 This is slow on a single machine, and very slow when consuming across a cluster.
 
-Furthermore for many uses it is simply more natural to specify a prefetch count that applies to each consumer.
+Furthermore, for many uses, it is simply more natural to specify a prefetch count that applies to each consumer.
 
 ###### Single Consumer
 
