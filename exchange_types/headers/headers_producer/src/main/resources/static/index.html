@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Events service</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- A beautiful CSS framework designed for minimalists. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css"/>
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <h1>REST Service</h1>
+    <div id="root"></div>
+</div>
+<script type="text/babel" defer>
+    function NewsApp() {
+        const initialForm = {message: "", type: "USER"};
+        const [form, setForm] = React.useState(initialForm);
+        const [events, setEvents] = React.useState([]);
+
+        React.useEffect(() => {
+            fetchNews();
+        }, []);
+
+        const fetchNews = () => {
+            fetch("/v1/events")
+                .then(res => res.json())
+                .then(data => setEvents(data))
+                .catch(err => alert("Failed to fetch news: " + err));
+        };
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            fetch("/v1/events", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify(form)
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to save");
+                    return res.json();
+                })
+                .then((savedEvents) => {
+                    // reset form
+                    setForm({message: "", type: "USER"});
+                    // fetchNews();
+                    setEvents(prevNews => [...prevNews, savedEvents]);
+                })
+                .catch(err => alert(err.message));
+        };
+        return (
+            <div>
+                <h3>Add Events</h3>
+                <form onSubmit={handleSubmit}>
+                    <div className="row">
+                        <div className="col-4">
+                            <label>
+                                <input
+                                    type="text"
+                                    placeholder="Message"
+                                    value={form.message}
+                                    onChange={(e) => setForm({...form, message: e.target.value})}
+                                />
+                            </label>
+                        </div>
+                        <div className="col-4">
+                            <label>
+                                <select
+                                    style={{height: "40px"}}
+                                    value={form.type}
+                                    onChange={(e) => setForm({...form, type: e.target.value})}>
+                                    <option value="ORDER">ORDER</option>
+                                    <option value="USER">USER</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div className="col-4">
+                            <input type="submit" value="Save"></input>
+                        </div>
+                    </div>
+                </form>
+
+                <h3>Events</h3>
+                <div className="row">
+                    <div className="col-3"><strong>Id</strong></div>
+                    <div className="col-3"><strong>Message</strong></div>
+                    <div className="col-3"><strong>Type</strong></div>
+                    <div className="col-3"><strong>Timestamp</strong></div>
+                </div>
+                {events.map((event, index) => (
+                    <div className="row" key={index}>
+                        <div className="col-3">{event.id}</div>
+                        <div className="col-3">{event.message}</div>
+                        <div className="col-3">{event.type}</div>
+                        <div className="col-3">{event.timestamp}</div>
+                    </div>
+                ))}
+            </div>
+        );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+        <NewsApp/>
+    );
+</script>
+</body>
+</html>

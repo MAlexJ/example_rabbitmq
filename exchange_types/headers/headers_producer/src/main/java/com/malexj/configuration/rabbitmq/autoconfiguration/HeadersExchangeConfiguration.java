@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /*
- * Configuration class for declaring a RabbitMQ TopicExchange bean.
+ * Configuration class for declaring a RabbitMQ HeadersExchange bean.
  *
  * Spring AMQP's {@code RabbitAdmin} automatically declares the exchange on the broker at startup
  * if it is present in the context.
  */
 @Configuration
-public class ExchangeConfiguration {
+public class HeadersExchangeConfiguration {
 
   @Value("${custom.rabbitmq.exchange}")
   private String exchange;
@@ -25,7 +25,7 @@ public class ExchangeConfiguration {
    */
   @Bean
   public TopicExchange topicExchange() {
-    return ExchangeBuilder.topicExchange(exchange)
+    return ExchangeBuilder.headersExchange(exchange)
         // Makes the exchange durable, meaning it will survive broker restarts.
         .durable(true)
         .build();

@@ -1,12 +1,12 @@
-package com.malex;
+package com.malexj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class StreamApplication {
+public class HeadersProducerApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(StreamApplication.class, args);
+    SpringApplication.run(HeadersProducerApplication.class, args);
   }
 }

@@ -1,5 +1,9 @@
 ### Stream Queues
 
+link: https://www.cloudamqp.com/blog/rabbitmq-streams-and-replay-features-part-1-when-to-use-rabbitmq-streams.html?utm_source=google&utm_medium=cpc&utm_campaign=19669834282&utm_term=rabbitmq%20streams&gad_source=1&gad_campaignid=19669834282&gbraid=0AAAAApKbGlkZcr9krwyZOR6uqN5sYr3jH&gclid=Cj0KCQjw5ubABhDIARIsAHMighaTxGigFHPaB0da9nrFgOJczzrQlV9FHR09KsEZrIfXN14a65f2zEYaApmrEALw_wcB
+
+habr: https://habr.com/ru/companies/otus/articles/653689/
+
 official doc: https://www.cloudamqp.com/blog/rabbitmq-queue-types.html#stream-queues
 
 Stream queues in RabbitMQ are a persistent and replicated data structure that, like traditional queues,
@@ -31,27 +35,26 @@ The use cases where streams shine include:
 * High Throughput:
   RabbitMQ Streams process relatively higher volumes of messages per second.
 
-
 #### Stream Queues features
 
 Some of the key features supported in Stream Queues are, but not limited to:
 
-* Persistent and Replicated: 
+* Persistent and Replicated:
   Stream queues always save data to disk and replicate it across nodes, ensuring high data durability.
 
-* Non-Destructive Read: 
+* Non-Destructive Read:
   Consumers can read the same messages repeatedly without removing them from the queue.
 
-* High Throughput: 
+* High Throughput:
   Stream-specific features and a dedicated binary protocol plugin provide optimal performance.
 
-* Inherent Lazy Behaviour: 
+* Inherent Lazy Behaviour:
   Messages are stored directly on disk and do not consume memory until read.
 
-* No Non-Durable or Exclusive Queues: 
+* No Non-Durable or Exclusive Queues:
   Stream queues are always durable and cannot be exclusive or temporary.
 
-* No TTL or Queue Length Limits: 
+* No TTL or Queue Length Limits:
   Instead of TTL and length limits, streams use retention policies to manage data lifecycle.
 
 
