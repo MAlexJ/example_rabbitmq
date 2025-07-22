@@ -17,25 +17,25 @@
     <div id="root"></div>
 </div>
 <script type="text/babel" defer>
-    function NewsApp() {
-        const initialForm = {message: "", type: "USER"};
+    function DocumentsApp() {
+        const initialForm = {name: "", type: "PDF"};
         const [form, setForm] = React.useState(initialForm);
-        const [events, setEvents] = React.useState([]);
+        const [documents, setDocuments] = React.useState([]);
 
         React.useEffect(() => {
             fetchNews();
         }, []);
 
         const fetchNews = () => {
-            fetch("/v1/events")
+            fetch("/v1/documents")
                 .then(res => res.json())
-                .then(data => setEvents(data))
-                .catch(err => alert("Failed to fetch news: " + err));
+                .then(data => setDocuments(data))
+                .catch(err => alert("Failed to fetch documents: " + err));
         };
 
         const handleSubmit = (e) => {
             e.preventDefault();
-            fetch("/v1/events", {
+            fetch("/v1/documents", {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(form)
@@ -44,26 +44,26 @@
                     if (!res.ok) throw new Error("Failed to save");
                     return res.json();
                 })
-                .then((savedEvents) => {
+                .then((savedDocuments) => {
                     // reset form
-                    setForm({message: "", type: "USER"});
+                    setForm({name: "", type: "PDF"});
                     // fetchNews();
-                    setEvents(prevNews => [...prevNews, savedEvents]);
+                    setDocuments(prevNews => [...prevNews, savedDocuments]);
                 })
                 .catch(err => alert(err.message));
         };
         return (
             <div>
-                <h3>Add Events</h3>
+                <h3>Add Document</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-4">
                             <label>
                                 <input
                                     type="text"
-                                    placeholder="Message"
-                                    value={form.message}
-                                    onChange={(e) => setForm({...form, message: e.target.value})}
+                                    placeholder="Name"
+                                    value={form.name}
+                                    onChange={(e) => setForm({...form, name: e.target.value})}
                                 />
                             </label>
                         </div>
@@ -73,8 +73,8 @@
                                     style={{height: "40px"}}
                                     value={form.type}
                                     onChange={(e) => setForm({...form, type: e.target.value})}>
-                                    <option value="ORDER">ORDER</option>
-                                    <option value="USER">USER</option>
+                                    <option value="PDF">PDF</option>
+                                    <option value="TXT">TXT</option>
                                 </select>
                             </label>
                         </div>
@@ -84,19 +84,19 @@
                     </div>
                 </form>
 
-                <h3>Events</h3>
+                <h3>Documents</h3>
                 <div className="row">
-                    <div className="col-3"><strong>Id</strong></div>
-                    <div className="col-3"><strong>Message</strong></div>
+                    <div className="col-3"><strong>UUID</strong></div>
+                    <div className="col-3"><strong>Name</strong></div>
                     <div className="col-3"><strong>Type</strong></div>
                     <div className="col-3"><strong>Timestamp</strong></div>
                 </div>
-                {events.map((event, index) => (
+                {documents.map((document, index) => (
                     <div className="row" key={index}>
-                        <div className="col-3">{event.id}</div>
-                        <div className="col-3">{event.message}</div>
-                        <div className="col-3">{event.type}</div>
-                        <div className="col-3">{event.timestamp}</div>
+                        <div className="col-3">{document.uuid}</div>
+                        <div className="col-3">{document.name}</div>
+                        <div className="col-3">{document.type}</div>
+                        <div className="col-3">{document.timestamp}</div>
                     </div>
                 ))}
             </div>
@@ -104,7 +104,7 @@
     }
 
     ReactDOM.createRoot(document.getElementById('root')).render(
-        <NewsApp/>
+        <DocumentsApp/>
     );
 </script>
 </body>

@@ -2,11 +2,11 @@ package com.malexj.producer;
 
 import java.util.Arrays;
 
-public enum EventType {
-  ORDER,
-  USER;
+public enum DocumentType {
+  PDF,
+  TXT;
 
-  public static EventType findByName(String type) {
+  public static DocumentType findByName(String type) {
     return Arrays.stream(values())
         .filter(t -> t.name().equalsIgnoreCase(type))
         .findFirst()

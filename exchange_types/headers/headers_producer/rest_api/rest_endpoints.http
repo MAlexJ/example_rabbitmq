@@ -1,0 +1,20 @@
+### Create PDF document
+POST http://localhost:8080/v1/documents
+Content-Type: application/json
+
+{
+  "name": "instruction",
+  "type": "pdf"
+}
+
+### Create TXT document
+POST http://localhost:8080/v1/documents
+Content-Type: application/json
+
+{
+  "name": "readme_file",
+  "type": "TXT"
+}
+
+### Find all documents
+GET http://localhost:8080/v1/documents

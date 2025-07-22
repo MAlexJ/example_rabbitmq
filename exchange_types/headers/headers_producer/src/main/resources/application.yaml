@@ -27,4 +27,4 @@ spring:
 custom:
   rabbitmq:
     exchange: headers_producer_exchange
-    routing_key: headers_producer_routing_key
+    #

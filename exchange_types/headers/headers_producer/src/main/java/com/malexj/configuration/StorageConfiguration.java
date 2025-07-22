@@ -1,6 +1,6 @@
 package com.malexj.configuration;
 
-import com.malexj.producer.Event;
+import com.malexj.producer.Document;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicReference;
@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 public class StorageConfiguration {
 
   @Bean
-  public AtomicReference<Event> referenceStorage() {
+  public AtomicReference<Document> referenceStorage() {
     return new AtomicReference<>();
   }
 
   @Bean
-  public List<Event> eventStorage() {
+  public List<Document> storage() {
     return new CopyOnWriteArrayList<>();
   }
 }

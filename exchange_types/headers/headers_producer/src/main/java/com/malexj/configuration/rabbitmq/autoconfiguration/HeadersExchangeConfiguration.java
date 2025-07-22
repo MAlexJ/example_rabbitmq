@@ -1,7 +1,7 @@
 package com.malexj.configuration.rabbitmq.autoconfiguration;
 
 import org.springframework.amqp.core.ExchangeBuilder;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.HeadersExchange;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,12 +19,12 @@ public class HeadersExchangeConfiguration {
   private String exchange;
 
   /**
-   * Declares a {@link TopicExchange} using the configured exchange name.
+   * Declares a {@link HeadersExchange} using the configured exchange name.
    *
-   * @return a {@link TopicExchange} built with {@link ExchangeBuilder}
+   * @return a {@link HeadersExchange} built with {@link ExchangeBuilder}
    */
   @Bean
-  public TopicExchange topicExchange() {
+  public HeadersExchange headersExchange() {
     return ExchangeBuilder.headersExchange(exchange)
         // Makes the exchange durable, meaning it will survive broker restarts.
         .durable(true)
