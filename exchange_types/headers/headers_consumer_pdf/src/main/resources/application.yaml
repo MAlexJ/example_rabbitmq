@@ -1,0 +1,29 @@
+server:
+  port: 8082
+  error:
+    include-message: always
+    whitelabel:
+      enabled: true
+
+spring:
+  application:
+    name: headers_consumer_pdf
+
+  config:
+    import: optional:file:.env[.properties]
+
+  threads:
+    virtual:
+      enabled: true
+
+  rabbitmq:
+    username: ${RABBITMQ_USERNAME}
+    password: ${RABBITMQ_PASSWORD}
+    port: ${RABBITMQ_PORT}
+    host: ${RABBITMQ_HOST}
+    publisher-returns: true
+    virtual-host: ${RABBITMQ_VIRTUAL_HOST}
+
+custom:
+  rabbitmq:
+    queue: headers_consumer_pdf_queue
