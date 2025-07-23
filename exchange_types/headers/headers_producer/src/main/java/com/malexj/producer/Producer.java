@@ -19,8 +19,8 @@ public class Producer {
     rabbitTemplate.convertAndSend(
         document,
         message -> {
-          message.getMessageProperties().setHeader("format", "json");
-          message.getMessageProperties().setHeader("documentType", document.type().name());
+          message.getMessageProperties().setHeader("content", "json");
+          message.getMessageProperties().setHeader("format", document.type().abbreviation());
           return message;
         });
   }

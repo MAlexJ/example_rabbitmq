@@ -27,4 +27,3 @@ spring:
 custom:
   rabbitmq:
     exchange: headers_producer_exchange
-    #

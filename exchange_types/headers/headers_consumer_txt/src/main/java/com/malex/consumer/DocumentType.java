@@ -1,4 +1,4 @@
-package com.malexj.producer;
+package com.malex.consumer;
 
 import java.util.Arrays;
 

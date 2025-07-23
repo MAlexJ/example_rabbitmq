@@ -26,4 +26,8 @@ spring:
 
 custom:
   rabbitmq:
+    exchange: headers_producer_exchange
     queue: headers_consumer_txt_queue
+    headers:
+      name: format
+      type: txt
