@@ -26,7 +26,8 @@ include 'api:reactive:simple_json',
         'queue_types:quorum_queue',
         'queue_types:mqtt_qos_queue',
         'queue_types:classic_queue',
+        'queue_types:priority_queue',
         'acknowledgement',
-        'pull_vs_push_approach',
-        'prefetch_count:bean_configuration_perfect_count',
-        'prefetch_count:rabbit_properties_prefetch_count'
+        'push_based_approach',
+        'prefetch_count:bean_configuration',
+        'prefetch_count:application_properties'

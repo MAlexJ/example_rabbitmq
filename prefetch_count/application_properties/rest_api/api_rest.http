@@ -1,0 +1,8 @@
+### Create Event
+POST http://localhost:8080/v1/messages
+Content-Type: application/json
+
+{
+  "id": 1,
+  "text": "Hello java!!!"
+}
